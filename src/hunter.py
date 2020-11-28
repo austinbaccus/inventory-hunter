@@ -2,34 +2,13 @@ import logging
 import sched
 import smtplib
 import sys
-
-from email.message import EmailMessage
+import winsound
 from scraper import Scraper
-
-
-class Alerter:
-    def __init__(self, args):
-        self.sender = args.email[0]
-        self.recipients = args.email
-        self.relay = args.relay
-
-        # self('Testing relay', 'You can delete this message.')
-
-    def __call__(self, subject, content):
-        msg = EmailMessage()
-        msg.set_content(content)
-        if subject:
-            msg['Subject'] = subject
-        msg['From'] = self.sender
-        msg['To'] = ', '.join(self.recipients)
-        with smtplib.SMTP(self.relay) as s:
-            logging.debug(f'sending email: subject: {subject}')
-            s.send_message(msg)
+from termcolor import colored
 
 
 class Engine:
     def __init__(self, args, config):
-        self.alerter = Alerter(args)
         self.refresh_interval = config.refresh_interval
         self.max_price = config.max_price
         self.scheduler = sched.scheduler()
@@ -59,55 +38,23 @@ class Engine:
 
     def process_scrape_result(self, s, result):
         currently_in_stock = bool(result)
-        current_price = result.price
 
-        if currently_in_stock and s.in_stock_on_last_scrape:
-
-            # if no pricing is available, we'll assume the price hasn't changed
-            if current_price is None or s.price_on_last_scrape is None:
-                logging.info(f'{s.name}: still in stock')
-
-            # is the current price the same as the last price? (most likely yes)
-            elif current_price == s.price_on_last_scrape:
-                logging.info(f'{s.name}: still in stock at the same price')
-
-            # has the price gone down?
-            elif current_price < s.price_on_last_scrape:
-
-                if self.max_price is None or current_price <= self.max_price:
-                    self.send_alert(s, result, f'now in stock at {current_price}!')
-                else:
-                    logging.info(f'{s.name}: now in stock at {current_price}... still too expensive')
-
-            else:
-                logging.info(f'{s.name}: now in stock at {current_price}... more expensive than before :(')
-
-        elif currently_in_stock and not s.in_stock_on_last_scrape:
-
-            # if no pricing is available, we'll assume the price is low enough
-            if current_price is None:
-                self.send_alert(s, result, 'now in stock!')
-
-            # is the current price low enough?
-            elif self.max_price is None or current_price <= self.max_price:
-                self.send_alert(s, result, f'now in stock at {current_price}!')
-
-            else:
-                logging.info(f'{s.name}: now in stock at {current_price}... too expensive')
-
-        elif not currently_in_stock and result.has_phrase('are you a human'):
-
-            logging.error(f'{s.name}: got "are you a human" prompt')
-            self.alerter('Something went wrong',
-                         f'You need to answer this CAPTCHA and restart this script: {result.url}')
-            sys.exit(1)
+        if currently_in_stock:
+            self.print_in_stock_alert(s.name)
+            while True:
+                winsound.PlaySound(".\\resources\\VenatorHangarHit.wav", winsound.SND_FILENAME)
+                winsound.PlaySound(".\\resources\\yes.wav", winsound.SND_FILENAME)
 
         else:
-            logging.info(f'{s.name}: not in stock')
+            print(colored(s.name, 'white'), colored(' not in stock!', 'red'))
 
-        # cache current state
-        s.in_stock_on_last_scrape = currently_in_stock
-        s.price_on_last_scrape = current_price
+    def print_in_stock_alert(self, product_name):
+        for i in range(0,20):
+            print(colored('***********************************************************************************', 'red'))
+        print()
+        print()
+        print()
+        print(colored(product_name, 'red'), colored(' in stock!', 'green'))
 
     def send_alert(self, s, result, reason):
         logging.info(f'{s.name}: {reason}')
