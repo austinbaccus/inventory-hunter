@@ -4,32 +4,26 @@ This bot helped me snag an RTX 3070... hopefully it will help you get your hands
 
 ## Requirements
 
-- Raspberry Pi (alternatively, you can use an always-on PC)
-- [Docker](https://www.docker.com/) ([tutorial](https://phoenixnap.com/kb/docker-on-raspberry-pi))
-- SMTP relay to send automated emails ([tutorial](https://medium.com/swlh/setting-up-gmail-and-other-email-on-a-raspberry-pi-6f7e3ad3d0e))
+- [Python](https://www.python.org/downloads/)
 
 ## Quick Start
 
-These steps *should* work on any supported Docker platform, but they have been specifically tested on Raspberry Pi OS with Docker already installed.
+1. First, open your command prompt program of choice (I prefer using [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701) but feel free to use PowerShell or Command Prompt).
 
-1. Clone this repository and build a Docker image using the provided [Dockerfile](Dockerfile):
+2. Navigate to the folder you want to keep this program in.
+
 ```
-$ git clone https://github.com/EricJMarti/inventory-hunter.git
+$ git clone https://github.com/austinbaccus/inventory-hunter.git
 $ cd inventory-hunter
-$ docker build -t inventory-hunter .
+$ python src.run.py -c <config_file>
 ```
 
-Note: The `docker build` command may take a while to complete. 
-
-2. Create your own configuration file based on one of the provided examples:
-- [Newegg RTX 3070 config](config/newegg_rtx_3070.yaml)
-- [B&H Photo Video RTX 3070 config](config/bhphoto_rtx_3070.yaml)
-- [Micro Center RTX 3070 config](config/microcenter_rtx_3070.yaml)
-
-3. Start the Docker container, specifying the required arguments. See example `docker run` command in [docker_run.bash](docker_run.bash) or run:
+Here is the exact line I use to run this program:
 ```
-$ ./docker_run.bash -c <config_file> -e <email_address> -r <relay_ip_address>
+$ python src/run.py -c config/main.yaml
 ```
+
+You can use any of the pre-made YAML files in the /config folder or make your own. 
 
 ## How it works
 
