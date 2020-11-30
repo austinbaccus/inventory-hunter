@@ -15,22 +15,22 @@ Hopefully this helps you get the gift you want this year! My only request is tha
 
 3. Clone the repository.
 ```
-$ git clone https://github.com/austinbaccus/inventory-hunter.git
+git clone https://github.com/austinbaccus/inventory-hunter.git
 ```
 
 4. Navigate into the newly created inventory-hunter folder, and run the program.
 ```
-$ cd inventory-hunter
+cd inventory-hunter
 ```
 
 5. Run the program
 ```
-$ python src.run.py -c <config_file>
+python src.run.py -c <config_file>
 ```
 
-Here is the exact line I use to run this program:
+Here is what your command prompt should look like when you are about to start the program:
 ```
-$ python src/run.py -c config/main.yaml
+C:\Users\austin\source\repos\inventory-hunter> python src/run.py -c config/main.yaml
 ```
 
 You can use any of the pre-made YAML files in the /config folder or make your own. 
