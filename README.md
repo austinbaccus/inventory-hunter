@@ -1,10 +1,11 @@
 # Inventory Hunter
 
-Hopefully this helps you get the gift you want this year! My only request is that you do not use this for scalping (buying an in-demand item and selling it for a profit).
+Hopefully this helps you get the gift you want this year! My only request is that you do not use this for scalping (buying an in-demand item and selling it for a profit). I originally forked this repository from [EricJMarti](https://github.com/EricJMarti/inventory-hunter) and modified it to fit my needs.
 
 ## Requirements
 
 - [Python](https://www.python.org/downloads/)
+- [Git](https://git-scm.com/downloads)
 
 ## Quick Start
 
