@@ -3,6 +3,7 @@ import sched
 import smtplib
 import sys
 import winsound
+import webbrowser
 from scraper import Scraper
 from termcolor import colored
 
@@ -40,21 +41,35 @@ class Engine:
         currently_in_stock = bool(result)
 
         if currently_in_stock:
-            self.print_in_stock_alert(s.name)
-            while True:
-                winsound.PlaySound(".\\resources\\VenatorHangarHit.wav", winsound.SND_FILENAME)
-                winsound.PlaySound(".\\resources\\yes.wav", winsound.SND_FILENAME)
-
+            if self.max_price is not None and result.price <= self.max_price:
+                self.in_stock_good_price(s.name, result.price, s.url)
+            else:
+                self.in_stock_bad_price(s.name, result.price)
         else:
-            print(colored(s.name, 'white'), colored(' not in stock!', 'red'))
+            self.not_in_stock(s.name)
 
-    def print_in_stock_alert(self, product_name):
+    def in_stock_good_price(self, product_name, price, url):
         for i in range(0,20):
             print(colored('***********************************************************************************', 'red'))
         print()
         print()
         print()
-        print(colored(product_name, 'red'), colored(' in stock!', 'green'))
+        print(colored(product_name, 'white'), colored('in stock for', 'green'), colored(f'${price}', 'green'))
+
+        # open the webpage for this item
+        webbrowser.open(f'{url}', new=2)
+
+        # play the alarm sound!
+        print("Press Ctrl-C to end the program")
+        while True:
+            winsound.PlaySound(".\\resources\\VenatorHangarHit.wav", winsound.SND_FILENAME)
+            winsound.PlaySound(".\\resources\\yes.wav", winsound.SND_FILENAME)
+
+    def in_stock_bad_price(self, product_name, price):
+            print(colored(product_name, 'white'), colored(f'in stock for bad price: ${price}', 'red'))
+
+    def not_in_stock(self, product_name):
+        print(colored(product_name, 'white'), colored('not in stock', 'red'))
 
     def send_alert(self, s, result, reason):
         logging.info(f'{s.name}: {reason}')
