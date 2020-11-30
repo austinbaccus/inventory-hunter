@@ -50,23 +50,20 @@ class Engine:
 
     def in_stock_good_price(self, product_name, price, url):
         for i in range(0,20):
-            print(colored('***********************************************************************************', 'red'))
-        print()
-        print()
-        print()
-        print(colored(product_name, 'white'), colored('in stock for', 'green'), colored(f'${price}', 'green'))
+            print(colored('***********************************************************************************', 'green'))
+        print("\n\n\n", colored(product_name, 'white'), colored('in stock for', 'green'), colored(f'${price}', 'green'))
 
         # open the webpage for this item
         webbrowser.open(f'{url}', new=2)
 
-        # play the alarm sound!
+        # play the alarm sound until the user ends the program
         print("Press Ctrl-C to end the program")
         while True:
             winsound.PlaySound(".\\resources\\VenatorHangarHit.wav", winsound.SND_FILENAME)
             winsound.PlaySound(".\\resources\\yes.wav", winsound.SND_FILENAME)
 
     def in_stock_bad_price(self, product_name, price):
-            print(colored(product_name, 'white'), colored(f'in stock for bad price: ${price}', 'red'))
+        print(colored(product_name, 'white'), colored(f'in stock for bad price: ${price}', 'red'))
 
     def not_in_stock(self, product_name):
         print(colored(product_name, 'white'), colored('not in stock', 'red'))
