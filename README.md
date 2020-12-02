@@ -7,6 +7,11 @@ Hopefully this helps you get the gift you want this year! My only request is tha
 - [Python](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
 
+You will also need one of the following:
+- [Discord Webhook URL](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+- [Slack Webhook URL](https://api.slack.com/messaging/webhooks)
+- [SMTP relay to send automated emails](https://medium.com/swlh/setting-up-gmail-and-other-email-on-a-raspberry-pi-6f7e3ad3d0e)
+
 ## Quick Start
 
 1. First, open your command prompt program of choice (I prefer using [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701) but feel free to use PowerShell or Command Prompt).
@@ -44,6 +49,7 @@ The general idea is if you can get notified as soon as a product becomes in stoc
 ### How is this different from existing online inventory trackers?
 
 Before developing inventory-hunter, I used several existing services without any luck. By the time I received an alert, the product had already been scalped. This bot alerts faster than existing trackers for several reasons:
+
 - it runs on your own hardware, so no processing time is spent servicing other users
 - you get to choose which products you want to track
 - you are in control of the refresh frequency

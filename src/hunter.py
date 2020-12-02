@@ -1,6 +1,5 @@
 import logging
 import sched
-import smtplib
 import sys
 import winsound
 import webbrowser
@@ -13,7 +12,7 @@ class Engine:
         self.refresh_interval = config.refresh_interval
         self.max_price = config.max_price
         self.scheduler = sched.scheduler()
-        self.scrapers = [Scraper(url, self.refresh_interval) for url in config.urls]
+        self.scrapers = init_scrapers(driver, config.urls)
         for s in self.scrapers:
             self.schedule(s)
 
@@ -39,6 +38,7 @@ class Engine:
 
     def process_scrape_result(self, s, result):
         currently_in_stock = bool(result)
+        last_price = result.last_price
 
         if currently_in_stock:
             if self.max_price is not None and result.price <= self.max_price:
@@ -70,7 +70,7 @@ class Engine:
 
     def send_alert(self, s, result, reason):
         logging.info(f'{s.name}: {reason}')
-        self.alerter(result.alert_subject, result.alert_content)
+        self.alerter(subject=result.alert_subject, content=result.alert_content)
 
 
 def hunt(args, config):

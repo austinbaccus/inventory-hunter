@@ -1,6 +1,6 @@
 ---
 refresh_interval: 2 # seconds
-max_price: 700 # dollars
+max_price: 900 # dollars
 urls:
   - https://www.newegg.com/amd-ryzen-7-5800x/p/N82E16819113665
   - https://www.newegg.com/asus-geforce-rtx-3080-rog-strix-rtx3080-o10g-gaming/p/N82E16814126457
