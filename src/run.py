@@ -19,17 +19,12 @@ from hunter import hunt
 
 def parse_args():
     parser = argparse.ArgumentParser()
-
-
-
     parser.add_argument('-c', '--config', type=argparse.FileType('r'), default='/config.yaml', help='YAML config file')
     return parser.parse_args()
     
-
-
 def main():
     args = parse_args()
-    logging.getLogger().setLevel(logging.DEBUG if args.verbose else logging.INFO)
+    logging.getLogger().setLevel(logging.INFO)
 
     try:
         config = parse_config(args.config)

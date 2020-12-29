@@ -3,12 +3,12 @@ import sched
 import sys
 import winsound
 import webbrowser
-from scraper import Scraper
+from scraper import init_scrapers
 from termcolor import colored
 
 
 class Engine:
-    def __init__(self, args, config):
+    def __init__(self, args, config, driver):
         self.refresh_interval = config.refresh_interval
         self.max_price = config.max_price
         self.scheduler = sched.scheduler()
@@ -63,7 +63,7 @@ class Engine:
             winsound.PlaySound(".\\resources\\yes.wav", winsound.SND_FILENAME)
 
     def in_stock_bad_price(self, product_name, price):
-        print(colored(product_name, 'white'), colored(f'in stock for bad price: ${price}', 'red'))
+        print(colored(product_name, 'white'), colored(f'in stock for bad price: ${price}', 'yellow'))
 
     def not_in_stock(self, product_name):
         print(colored(product_name, 'white'), colored('not in stock', 'red'))
@@ -73,6 +73,6 @@ class Engine:
         self.alerter(subject=result.alert_subject, content=result.alert_content)
 
 
-def hunt(args, config):
-    engine = Engine(args, config)
+def hunt(args, config, driver):
+    engine = Engine(args, config, driver)
     engine.run()

@@ -1,8 +1,7 @@
 ---
-refresh_interval: 2 # seconds
-max_price: 900 # dollars
+refresh_interval: 3 # seconds
+max_price: 1000 # dollars
 urls:
-  - https://www.newegg.com/amd-ryzen-7-5800x/p/N82E16819113665
   - https://www.newegg.com/asus-geforce-rtx-3080-rog-strix-rtx3080-o10g-gaming/p/N82E16814126457
   - https://www.newegg.com/asus-geforce-rtx-3080-tuf-rtx3080-10g-gaming/p/N82E16814126453
   - https://www.newegg.com/asus-geforce-rtx-3080-tuf-rtx3080-o10g-gaming/p/N82E16814126452
@@ -25,4 +24,5 @@ urls:
   - https://www.newegg.com/gigabyte-radeon-rx-6800-xt-gv-r68xt-16gc-b/p/N82E16814932373
   - https://www.newegg.com/msi-radeon-rx-6800-xt-rx-6800-xt-16g/p/N82E16814137607
   - https://www.newegg.com/sapphire-radeon-rx-6800-xt-21304-01-20g/p/N82E16814202388
+  - https://www.bestbuy.com/site/nvidia-geforce-rtx-3080-10gb-gddr6x-pci-express-4-0-graphics-card-titanium-and-black/6429440.p?skuId=6429440
 ...
