@@ -30,7 +30,7 @@ cd inventory-hunter
 
 5. Run the program
 ```
-python src.run.py -c <config_file>
+python src/run.py -c <config_file>
 ```
 
 Here is what your command prompt should look like when you are about to start the program:
